@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: GitHub Test API
+  description: API for looking at open PRs from a github repository
+
+paths:
+  /githubURL:
+    post:
+      description: Return a list of open PRs from a github repository      
+      requestBody:
+        description: GitHub Repository URL
+        required: true
+        content:
+            application/json:
+                schema:
+                    type: object
+                    properties:
+                        url: string
+                    example:
+                        url: 'https://github.com/nbenoit3/drink-up'
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+                schema:
+                    type: array
+                    items:
+                        type: object
+        400:
+            description: Bad Request
+            content:
+                application/json:
+                    type: object
+                    properties:
+                        message: string
+        500:
+            description: Internal Server Error
+            content:
+                application/json:
+                    type: object
+                    properties:
+                        message: string
